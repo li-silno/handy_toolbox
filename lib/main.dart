@@ -1,21 +1,26 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:handy_toolbox/static/CustomColors.dart';
-import 'LeftSide.dart';
-import 'RightSide.dart';
+import 'package:window_manager/window_manager.dart';    // windows窗口管理库
+import 'LeftSide.dart';   // 左边部分
+import 'RightSide.dart';  // 右边部分
 
-void main() {
-  runApp(const MyApp());
-  doWhenWindowReady(() {
-    // 初始化窗口大小
-    var initSize = const Size(720, 540);
-    appWindow.size = initSize;
-    appWindow.minSize = initSize;
-    // 设置窗口标题
-    appWindow.title = "Handy Toolbox";
-    // 显示窗口 (在main.cpp中配置了启动后隐藏，以解决窗口闪烁问题)
-    appWindow.show();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // 必须加上这一行。
+  await windowManager.ensureInitialized();
+  // 窗口初始化配置
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(720, 540),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
   });
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,15 +31,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: WindowBorder(
-          color: LightColors().windowBorder,
-          width: 1,
-          child: Row(
-            children: const [
-              LeftSide(),
-              RightSide(),
-            ],
-          ),
+        body:  Row(
+          children: const [
+            LeftSide(),
+            RightSide(),
+          ],
         ),
       ),
     );
