@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'static/CustomColors.dart';
+import '../constants/CustomColors.dart';
 
 class LeftSide extends StatelessWidget {
   const LeftSide({Key? key}) : super(key: key);

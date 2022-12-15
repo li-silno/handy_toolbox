@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';    // windows窗口管理库
 import 'package:windows_single_instance/windows_single_instance.dart';    // 实现应用单例：重复点击时会让用户获得焦点置顶，而不是多开一个应用
-import 'LeftSide.dart';   // 左边部分
-import 'RightSide.dart';  // 右边部分
+import 'view/LeftSide.dart';   // 左边部分
+import 'view/RightSide.dart';  // 右边部分
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();

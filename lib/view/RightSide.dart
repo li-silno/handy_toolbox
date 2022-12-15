@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'static/CustomColors.dart';
+import '/constants/CustomColors.dart';
 
 // 右边部分
 class RightSide extends StatelessWidget {
