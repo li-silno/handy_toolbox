@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';    // windows窗口管理库
-import 'package:windows_single_instance/windows_single_instance.dart';    // 实现应用单例：重复点击时会让用户获得焦点置顶，而不是多开一个应用
-import 'view/LeftSide.dart';   // 左边部分
-import 'view/RightSide.dart';  // 右边部分
+import 'package:window_manager/window_manager.dart'; // windows窗口管理库
+import 'package:windows_single_instance/windows_single_instance.dart'; // 实现应用单例：重复点击时会让用户获得焦点置顶，而不是多开一个应用
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   // 单实例启动
   await WindowsSingleInstance.ensureSingleInstance(args, "handy_toolbox",
       onSecondWindow: (args) async {
-        if (await windowManager.isMinimized()) {
-          windowManager.restore();
-        }
-        windowManager.focus();
-      });
+    if (await windowManager.isMinimized()) {
+      windowManager.restore();
+    }
+    windowManager.focus();
+  });
   // 必须加上这一行。
   await windowManager.ensureInitialized();
   // 窗口初始化配置
@@ -22,7 +20,7 @@ void main(List<String> args) async {
     minimumSize: Size(720, 540),
     center: true,
     skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.normal,    // 是否显示默认标题栏
+    titleBarStyle: TitleBarStyle.normal, // 是否显示默认标题栏
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.setResizable(false);
@@ -41,16 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Row(
-          children: const [
-            LeftSide(),   // 左侧部分
-            RightSide(),  // 右侧部分
-          ],
-        ),
-      ),
+      home: Container(),
     );
   }
 }
-
-
